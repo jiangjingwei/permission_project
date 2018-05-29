@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .login{
+            position: absolute;
+            top: 33%;
+            left: 40%;
+        }
+
+        .error-msg{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+<form action="/login/" method="post" class="login">
+    {% csrf_token %}
+    <p>用户名：<input type="text" name="username"></p>
+    <p>密码：<input type="password" name="password"></p>
+    <input type="submit" value="提交"><span class="error-msg">{{ response_msg }}</span>
+</form>
+
+</body>
+</html>

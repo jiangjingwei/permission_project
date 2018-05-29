@@ -1,0 +1,59 @@
+{% load menu_tags %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'rbac/js/jquery-1.12.4.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'rbac/theme/rbac.css' %}">
+    <script type="text/javascript" src="{% static 'rbac/theme/rbac.js' %}"></script>
+    <script>
+        $(function () {
+            {% rbac_js %}
+        });
+    </script>
+    <style>
+        {% rbac_css %}
+    </style>
+</head>
+<body>
+<h1>Welcome</h1>
+
+{#{% for menu in permission_all_menu %}#}
+{#    {% if menu.parent_caption %}#}
+{##}
+{#    {% else %}#}
+{#        <p>{{ menu.caption }}</p>#}
+{#    {% endif %}#}
+{##}
+{#{% endfor %}#}
+
+{% rbac_menus request%}
+<hr>
+
+
+<h3><a href="{% url 'add' %}">添加用户</a></h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>昵称</th>
+            <th>修改</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+            <tr>
+                <td>{{ user.pk }}</td>
+                <td>{{ user.nickname }}</td>
+                <td><a href="{% url 'change' user.pk %}">修改</a></td>
+                <td><a href="{% url 'delete' user.pk %}">删除</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
